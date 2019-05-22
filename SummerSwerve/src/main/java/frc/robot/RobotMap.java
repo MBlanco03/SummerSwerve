@@ -10,7 +10,9 @@ package frc.robot;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.kauailabs.navx.frc.AHRS;
 
+import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.SPI;
 
@@ -41,13 +43,14 @@ public class RobotMap {
 
   public static Joystick leftJoy = new Joystick(0);
   public static Joystick rightJoy = new Joystick(1);
-  public static DigitalInput[] encoder = new DigitalInput[8];
-  public static AHRS navx = new AHRS(SPI.Port.kMXP);
 
-  public RobotMap(){
-    for(int e = 0; e < 8; e++){
-      encoder[e] = new DigitalInput(e);
-    }
-  }
+  public static AnalogInput frontRight = new AnalogInput(0);
+  public static AnalogInput frontLeft = new AnalogInput(1);
+  public static AnalogInput rearRight = new AnalogInput(2);
+  public static AnalogInput rearLeft = new AnalogInput(3);
+
+  public static Encoder swerveEncoder = new Encoder(0, 0);
+
+  public static AHRS navx = new AHRS(SPI.Port.kMXP);
     }
 

@@ -49,6 +49,10 @@ private WPI_TalonSRX steerMotor;
     public WPI_TalonSRX getSteer(){
         return steerMotor;
     }
-    
+
+    public void move(double speed, double angle){
+        setSpeed(speed);
+        if (speed != 0.0) { setAngle(angle); }
+    }
 
 }

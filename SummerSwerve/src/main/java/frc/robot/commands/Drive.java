@@ -11,6 +11,11 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
 public class Drive extends Command {
+
+  private static double fwd;
+  private static double str;
+  private static double rcw;
+
   public Drive() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
@@ -25,7 +30,34 @@ public class Drive extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-  }
+    fwd = Robot.oi.getLeftJoy().getY();
+    str = Robot.oi.getLeftJoy().getX();
+    rcw = Robot.oi.getRightJoy().getY();
+
+    if (fwd < 0){
+      fwd *= fwd * -1;
+    }
+    else {
+      fwd *= fwd;
+    }
+    if(str < 0){
+      str *= str*-1;
+      }
+    else{
+      str *= str;
+    }
+    if(rcw < 0){
+      rcw *= rcw * -1;
+    }
+    else{
+      rcw  *= rcw;
+    }
+
+    Robot.drivetrain.move(fwd, str, rcw);
+
+    }
+    
+  
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
