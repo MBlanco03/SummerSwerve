@@ -9,12 +9,9 @@ package frc.robot.subsystems.Swerve;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
-import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.kauailabs.navx.frc.AHRS;
-
 import java.lang.Math;
-import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Joystick;
 import frc.robot.OI;
 import frc.robot.RobotMap;
@@ -32,7 +29,6 @@ public class SwerveMath {
     public static  WPI_TalonSRX rlDrive = RobotMap.RLTalonD; //rear left drive
     public static  WPI_TalonSRX rlSteer = RobotMap.RLTalonS; //rear left steer
    
-    private static DigitalInput[] encoder = RobotMap.encoder;
     private static Joystick leftJoy = OI.getLeftJoy();
     private static Joystick rightJoy = OI.getRightJoy();
     private static AHRS gyro = RobotMap.navx;
