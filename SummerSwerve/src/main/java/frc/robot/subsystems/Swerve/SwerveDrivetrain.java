@@ -70,6 +70,7 @@ public SwerveDrivetrain(){
 
   @Override
   public void initDefaultCommand() {
+    
     // Set the default command for a subsystem here.
     // setDefaultCommand(new MySpecialCommand());
     setDefaultCommand(new Drive());
@@ -100,9 +101,9 @@ public SwerveDrivetrain(){
 
     steerMotor.configAllowableClosedloopError(0, 4, 10);
 
-    steerMotor.config_kP(0, 1);
-    steerMotor.config_kI(0, 0);
-    steerMotor.config_kD(0, 0);
+    steerMotor.config_kP(0, P);
+    steerMotor.config_kI(0, I);
+    steerMotor.config_kD(0, D);
   }
 
   public void resetDriveEnc(){

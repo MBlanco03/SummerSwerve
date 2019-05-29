@@ -12,9 +12,9 @@ import frc.robot.Robot;
 
 public class Drive extends Command {
 
-  private static double fwd;
-  private static double str;
-  private static double rcw;
+  private double fwd;
+  private double str;
+  private double rcw;
 
   public Drive() {
     // Use requires() here to declare subsystem dependencies

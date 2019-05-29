@@ -31,7 +31,7 @@ math = new SwerveMath(width, length);
 }
 
 public void move(double fwd, double str, double rcw, double gyroVal){
-    //SwerveMath.move(fwd, str, rcw, gyroVal, swerveDirectives);
+    math.move(fwd, str, rcw, gyroVal, swerveDirectives);
 
     module1.move(swerveDirectives[0].getSpeed(), swerveDirectives[0].getAngle());
     module2.move(swerveDirectives[1].getSpeed(), swerveDirectives[1].getAngle());

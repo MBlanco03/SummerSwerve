@@ -9,24 +9,17 @@ package frc.robot.subsystems.Swerve;
 
 import com.kauailabs.navx.frc.AHRS;
 import java.lang.Math;
-import edu.wpi.first.wpilibj.Joystick;
-import frc.robot.OI;
 import frc.robot.RobotMap;
 
 /**
  * Add your docs here.
  */
 public class SwerveMath {
-    private static Joystick leftJoy = OI.getLeftJoy();
-    private static Joystick rightJoy = OI.getRightJoy();
-    private static AHRS gyro = RobotMap.navx;
-
     private final double length;
     private final double width;
     private final double diagonal;
 
     public SwerveMath(double width, double length){
-    
         // frDrive.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute);
         // flDrive.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute);
         // rrDrive.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute);
@@ -58,17 +51,6 @@ public class SwerveMath {
     double rla = Math.atan2(a,c)*180/Math.PI;
     //double temp = (fwd*Math.cos(gyro.getAngle())) + str*Math.sin(gyro.getAngle());
     double max = frs; 
-      
-    // frSteer.set((fra+180) * (1023/360));
-    // flSteer.set((fla+180) * (1023/360));
-    // rlSteer.set((rla+180) * (1023/360));
-    // rrSteer.set((rra+180) * (1023/360));
-
-    // frDrive.set(frs*12);
-    // flDrive.set(fls*12);
-    // rrDrive.set(rrs*12);
-    // rlDrive.set(rls*12);
-
     if(fls>max){
     	max = fls;
     }

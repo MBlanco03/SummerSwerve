@@ -21,10 +21,10 @@ public class OI {
 
   }
 
-  public static Joystick getLeftJoy(){
+  public Joystick getLeftJoy(){
     return leftJoy;
   }
-  public static Joystick getRightJoy(){
+  public Joystick getRightJoy(){
     return righJoy;
   }
   //// CREATING BUTTONS
