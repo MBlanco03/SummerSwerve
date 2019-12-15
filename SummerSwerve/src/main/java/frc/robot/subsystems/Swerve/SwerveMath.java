@@ -7,9 +7,7 @@
 
 package frc.robot.subsystems.Swerve;
 
-import com.kauailabs.navx.frc.AHRS;
 import java.lang.Math;
-import frc.robot.RobotMap;
 
 /**
  * Add your docs here.

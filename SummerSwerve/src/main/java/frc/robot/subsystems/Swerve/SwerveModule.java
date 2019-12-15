@@ -9,6 +9,7 @@ package frc.robot.subsystems.Swerve;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
 /**
  * Add your docs here.
@@ -18,22 +19,24 @@ public class SwerveModule {
 private String name;
 private double gearRatio;
 
-private WPI_TalonSRX driveMotor;
-private WPI_TalonSRX steerMotor;
+private Motor driveMotor;
+private Motor steerMotor;
+private WPI_TalonSRX x = new WPI_TalonSRX(0);
+
 
 private boolean reverseEncoder = false;
 private boolean reverseSteer = false;
 
-    public SwerveModule(String name, WPI_TalonSRX drive, WPI_TalonSRX steer){
+    public SwerveModule(String name, Motor drive, Motor steer, double gearRatio){
         this.name = name;
         driveMotor = drive;
         steerMotor = steer;
-        gearRatio = 1.0;
+        this.gearRatio = gearRatio;
     }
 
     public void stop(){
-        driveMotor.stopMotor();
-        steerMotor.stopMotor();
+        driveMotor.stop();
+        steerMotor.stop();
     }
 
     public void setSpeed(double speed){
@@ -70,6 +73,7 @@ private boolean reverseSteer = false;
     }
 
     //checks if the wheel is at a spot to reverse to get to desired direction
+    //The subsequen \t set and get angles all work towards making sure the wheel will turn the right direction
     public boolean shouldReverse(double wa, double encoderValue){
         double ea = SwerveUtil.convertEncoderValue(encoderValue, gearRatio);
 		

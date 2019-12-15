@@ -7,6 +7,7 @@
 
 package frc.robot;
 
+import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.kauailabs.navx.frc.AHRS;
 
@@ -32,22 +33,22 @@ public class RobotMap {
   // number and the module. For example you with a rangefinder:
   // public static int rangefinderPort = 1;
   // public static int rangefinderModule = 1;
-  public static  WPI_TalonSRX FRTalonD = new WPI_TalonSRX(0); //Front right drive
-  public static  WPI_TalonSRX FRTalonS = new WPI_TalonSRX(0); //front right steer
-  public static  WPI_TalonSRX FLTalonD = new WPI_TalonSRX(0); //front left drive
-  public static  WPI_TalonSRX FLTalonS = new WPI_TalonSRX(0); //front left steer
-  public static  WPI_TalonSRX RRTalonD = new WPI_TalonSRX(0); //rear right drive
-  public static  WPI_TalonSRX RRTalonS = new WPI_TalonSRX(0); //rear right steer
-  public static  WPI_TalonSRX RLTalonD = new WPI_TalonSRX(0); //rear left drive
-  public static  WPI_TalonSRX RLTalonS = new WPI_TalonSRX(0); //rear left steer
+  public static  WPI_TalonSRX FRTalonD = new WPI_TalonSRX(2); //Front right drive
+  public static  WPI_TalonSRX FRTalonS = new WPI_TalonSRX(4); //front right steer
+  public static  WPI_TalonSRX FLTalonD = new WPI_TalonSRX(6); //front left drive
+  public static  VictorSPX FLTalonS = new VictorSPX(0); //front left steer
+  public static  WPI_TalonSRX RRTalonD = new WPI_TalonSRX(7); //rear right drive
+  public static  VictorSPX RRTalonS = new VictorSPX(1); //rear right steer
+  public static  WPI_TalonSRX RLTalonD = new WPI_TalonSRX(3); //rear left drive
+  public static  WPI_TalonSRX RLTalonS = new WPI_TalonSRX(1); //rear left steer
 
   public static Joystick leftJoy = new Joystick(0);
   public static Joystick rightJoy = new Joystick(1);
 
-  public static AnalogInput frontRight = new AnalogInput(0);
-  public static AnalogInput frontLeft = new AnalogInput(1);
-  public static AnalogInput rearRight = new AnalogInput(2);
-  public static AnalogInput rearLeft = new AnalogInput(3);
+  public static DigitalInput frontRight = new DigitalInput(2);
+  public static DigitalInput frontLeft = new DigitalInput(4);
+  public static DigitalInput rearRight = new DigitalInput(0);
+  public static DigitalInput rearLeft = new DigitalInput(6);
 
   public static Encoder swerveEncoder = new Encoder(0, 0);
 

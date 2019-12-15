@@ -7,37 +7,25 @@
 
 package frc.robot.subsystems.Swerve;
 
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
+
 /**
  * Add your docs here.
  */
-public class SwerveDirective {
+public class Motor {
+    private WPI_TalonSRX motorT;
+    private WPI_VictorSPX motorV;
 
-private double speed;
-private double angle;
+    public Motor(WPI_TalonSRX m){
+        motorT = m;
+    }
+    public Motor(WPI_VictorSPX m){
+        motorV = m;
+    }
 
-public SwerveDirective(){
-    
-}
-
-public SwerveDirective(double speed, double angle){
-this.speed = speed;
-this.angle = angle;
-}
-
-public double getSpeed(){
-    return speed;
-}
-
-public double getAngle(){
-    return angle;
-}
-
-public void setSpeed(double speed){
-    this.speed = speed;
-}
-
-public void setAngle(double angle){
-    this.angle = angle;
-}
-
+    public void stop(){
+        motorT.stopMotor();
+        motorV.stopMotor();
+    }
 }

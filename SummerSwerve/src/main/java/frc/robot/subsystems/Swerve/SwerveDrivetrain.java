@@ -10,6 +10,7 @@ package frc.robot.subsystems.Swerve;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
+import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.kauailabs.navx.frc.AHRS;
 
@@ -29,14 +30,15 @@ public class SwerveDrivetrain extends Subsystem {
   public static WPI_TalonSRX frDrive = RobotMap.FRTalonD; //Front right drive
   public static WPI_TalonSRX frSteer = RobotMap.FRTalonS; //front right steer
   public static WPI_TalonSRX flDrive = RobotMap.FLTalonD; //front left drive
-  public static WPI_TalonSRX flSteer = RobotMap.FLTalonS; //front left steer
+  public static VictorSPX flSteer = RobotMap.FLTalonS; //front left steer
   public static WPI_TalonSRX rrDrive = RobotMap.RRTalonD; //rear right Drive
-  public static WPI_TalonSRX rrSteer = RobotMap.RRTalonS; //rear right steer
+  public static VictorSPX rrSteer = RobotMap.RRTalonS; //rear right steer
   public static WPI_TalonSRX rlDrive = RobotMap.RLTalonD; //rear left drive
   public static WPI_TalonSRX rlSteer = RobotMap.RLTalonS; //rear left steer
 
   private final double width = 1;
   private final double length = 1;
+  private final double gearRatio = 1.0;
 
   public Swerve swerveDrivetrain;
 
@@ -57,16 +59,16 @@ public class SwerveDrivetrain extends Subsystem {
   private final double I = 0;
   private final double D = 0;
 
-public SwerveDrivetrain(){
-  frontLeft = new SwerveModule("Front Left Wheel", flDrive, flSteer);
-  frontRight = new SwerveModule("Front Right Wheel", frDrive, flSteer);
-  rearLeft = new SwerveModule("Rear Left Wheel", rlDrive, rlSteer);
-  rearRight = new SwerveModule("Rear Right Wheel", rrDrive, rrSteer);
+  public SwerveDrivetrain(){
+    frontLeft = new SwerveModule("Front Left Wheel", flDrive, flSteer, gearRatio);
+    frontRight = new SwerveModule("Front Right Wheel", frDrive, flSteer, gearRatio);
+    rearLeft = new SwerveModule("Rear Left Wheel", rlDrive, rlSteer, gearRatio);
+    rearRight = new SwerveModule("Rear Right Wheel", rrDrive, rrSteer, gearRatio);
 
-  init();
+    init();
 
-  swerveDrivetrain = new Swerve(frontRight, frontLeft, rearRight, rearLeft, width, length);
-}
+    swerveDrivetrain = new Swerve(frontRight, frontLeft, rearRight, rearLeft, width, length);
+  }
 
   @Override
   public void initDefaultCommand() {
@@ -97,6 +99,16 @@ public SwerveDrivetrain(){
     steerMotor.configNominalOutputForward(0, 10);
     steerMotor.configNominalOutputReverse(0, 10);
 
+    frontRight.setReverseEncoder(true);
+		frontLeft.setReverseEncoder(true);
+		rearLeft.setReverseEncoder(true);
+		rearRight.setReverseEncoder(true);
+		
+		frontRight.setReverseSteerMotor(true);
+		frontLeft.setReverseSteerMotor(true);
+		rearLeft.setReverseSteerMotor(true);
+		rearRight.setReverseSteerMotor(true);
+
     steerMotor.setNeutralMode(NeutralMode.Brake);
 
     steerMotor.configAllowableClosedloopError(0, 4, 10);
@@ -119,20 +131,31 @@ public SwerveDrivetrain(){
     rlSteer.set(ControlMode.Position, 0);
   }
 
-public double getDistance(){
-  return enc.getDistance();
-}
+  public double getDistance(){
+    return enc.getDistance();
+  }
 
-public double getGyro(){
-  return gyro.getAngle();
-}
+  public double getGyro(){
+    return gyro.getAngle();
+  }
 
-public void move(double fwd, double str, double rcw){
-  swerveDrivetrain.move(fwd, str, rcw, getGyro());
-}
+  public void move(double fwd, double str, double rcw){
+    swerveDrivetrain.move(fwd, str, rcw, getGyro());
+  }
 
-public void stop(){
-  swerveDrivetrain.stop();
-}
-
+  public void stop(){
+    swerveDrivetrain.stop();
+  }
+  public AnalogInput getAnalogInputFrontRight() {
+    return analogFrontRight;
+  }
+  public AnalogInput getAnalogInputFrontLeft() {
+    return analogFrontLeft;
+  }
+  public AnalogInput getAnalogInputRearRight() {
+    return analogRearRight;
+  }
+  public AnalogInput getAnalogInputRearLeft() {
+    return analogRearLeft;
+  }
 }
