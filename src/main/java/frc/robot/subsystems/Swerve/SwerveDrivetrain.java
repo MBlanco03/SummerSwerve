@@ -10,11 +10,12 @@ package frc.robot.subsystems.Swerve;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
+import com.ctre.phoenix.motorcontrol.can.BaseMotorController;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.kauailabs.navx.frc.AHRS;
 
-import edu.wpi.first.wpilibj.AnalogInput;
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
@@ -27,14 +28,14 @@ public class SwerveDrivetrain extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
 
-  public static WPI_TalonSRX frDrive = RobotMap.FRTalonD; //Front right drive
-  public static WPI_TalonSRX frSteer = RobotMap.FRTalonS; //front right steer
-  public static WPI_TalonSRX flDrive = RobotMap.FLTalonD; //front left drive
-  public static VictorSPX flSteer = RobotMap.FLTalonS; //front left steer
-  public static WPI_TalonSRX rrDrive = RobotMap.RRTalonD; //rear right Drive
-  public static VictorSPX rrSteer = RobotMap.RRTalonS; //rear right steer
-  public static WPI_TalonSRX rlDrive = RobotMap.RLTalonD; //rear left drive
-  public static WPI_TalonSRX rlSteer = RobotMap.RLTalonS; //rear left steer
+  public static BaseMotorController frDrive = RobotMap.FRTalonD; //Front right drive
+  public static BaseMotorController frSteer = RobotMap.FRTalonS; //front right steer
+  public static BaseMotorController flDrive = RobotMap.FLTalonD; //front left drive
+  public static BaseMotorController flSteer = RobotMap.FLTalonS; //front left steer
+  public static BaseMotorController rrDrive = RobotMap.RRTalonD; //rear right Drive
+  public static BaseMotorController rrSteer = RobotMap.RRTalonS; //rear right steer
+  public static BaseMotorController rlDrive = RobotMap.RLTalonD; //rear left drive
+  public static BaseMotorController rlSteer = RobotMap.RLTalonS; //rear left steer
 
   private final double width = 1;
   private final double length = 1;
@@ -47,10 +48,10 @@ public class SwerveDrivetrain extends Subsystem {
   private SwerveModule rearRight;
   private SwerveModule rearLeft;
 
-  private AnalogInput analogFrontRight = RobotMap.frontRight;
-  private AnalogInput analogFrontLeft = RobotMap.frontLeft;
-  private AnalogInput analogRearRight = RobotMap.rearRight;
-  private AnalogInput analogRearLeft = RobotMap.rearLeft;
+  private DigitalInput analogFrontRight = RobotMap.frontRight;
+  private DigitalInput analogFrontLeft = RobotMap.frontLeft;
+  private DigitalInput analogRearRight = RobotMap.rearRight;
+  private DigitalInput analogRearLeft = RobotMap.rearLeft;
 
   private static Encoder enc = RobotMap.swerveEncoder;
   private static AHRS gyro = RobotMap.navx;
@@ -90,7 +91,7 @@ public class SwerveDrivetrain extends Subsystem {
    resetDriveEnc();
   }
 
-  public void initSteerMotor(WPI_TalonSRX steerMotor){
+  public void initSteerMotor(BaseMotorController steerMotor){
     steerMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 10);
 
     steerMotor.configPeakOutputForward(1, 10);
@@ -146,16 +147,16 @@ public class SwerveDrivetrain extends Subsystem {
   public void stop(){
     swerveDrivetrain.stop();
   }
-  public AnalogInput getAnalogInputFrontRight() {
+  public DigitalInput getAnalogInputFrontRight() {
     return analogFrontRight;
   }
-  public AnalogInput getAnalogInputFrontLeft() {
+  public DigitalInput getAnalogInputFrontLeft() {
     return analogFrontLeft;
   }
-  public AnalogInput getAnalogInputRearRight() {
+  public DigitalInput getAnalogInputRearRight() {
     return analogRearRight;
   }
-  public AnalogInput getAnalogInputRearLeft() {
+  public DigitalInput getAnalogInputRearLeft() {
     return analogRearLeft;
   }
 }

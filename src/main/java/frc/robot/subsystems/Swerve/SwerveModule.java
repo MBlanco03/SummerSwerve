@@ -8,6 +8,7 @@
 package frc.robot.subsystems.Swerve;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.can.BaseMotorController;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
@@ -19,15 +20,13 @@ public class SwerveModule {
 private String name;
 private double gearRatio;
 
-private Motor driveMotor;
-private Motor steerMotor;
-private WPI_TalonSRX x = new WPI_TalonSRX(0);
-
+private BaseMotorController driveMotor;
+private BaseMotorController steerMotor;
 
 private boolean reverseEncoder = false;
 private boolean reverseSteer = false;
 
-    public SwerveModule(String name, Motor drive, Motor steer, double gearRatio){
+    public SwerveModule(String name, BaseMotorController drive, BaseMotorController steer, double gearRatio){
         this.name = name;
         driveMotor = drive;
         steerMotor = steer;
@@ -35,8 +34,10 @@ private boolean reverseSteer = false;
     }
 
     public void stop(){
-        driveMotor.stop();
-        steerMotor.stop();
+        driveMotor.set(ControlMode.PercentOutput, 0);
+        steerMotor.set(ControlMode.PercentOutput, 0);
+        //driveMotor.stopMotor();
+        //steerMotor.stopMotor();
     }
 
     public void setSpeed(double speed){
@@ -55,11 +56,11 @@ private boolean reverseSteer = false;
         steerMotor.setSelectedSensorPosition(postion, 0, 10);
     }
 
-    public WPI_TalonSRX getDrive(){
+    public BaseMotorController getDrive(){
         return driveMotor;
     }
 
-    public WPI_TalonSRX getSteer(){
+    public BaseMotorController getSteer(){
         return steerMotor;
     }
 
